@@ -10,6 +10,8 @@
 ## 配置和地址
 
 ```js
+// 网络
+kovan.infura.io
 // 测试用的代币
 WETH  0x8B9b84b42b908E6f6D1E06CaA7C8247ED377095a
 // 资产
