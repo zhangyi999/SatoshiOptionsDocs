@@ -7,6 +7,33 @@
 * `contracts/public/BinaryOptions.sol`: 指数期权算法
 * `contracts/public/LinearOption.sol`: 指数线性算法
 
+## 配置和地址
+
+```js
+// 测试用的代币
+WETH  0x8B9b84b42b908E6f6D1E06CaA7C8247ED377095a
+// 资产
+BTC  0x176F9f144362AA97c287A45e02229c1146376734
+// 系统代币
+Charm  0xbBc8bba71730124b310f0ABF96df7A3F9f96256d
+
+// 配置合约
+Config  0x92F52EF91Ec9bC8308384D92fE05217B67D897Be
+
+// 开仓策略合约
+// 二元
+BinaryOptions  0x5264B091025F98E6689fd573d70eb484DAbaa136
+// 线性
+LinearOptions  0xfC082D596B089e9D4c136DfAA513A3f6E33a4f7d
+
+// 期权合约
+SatoshiOpstion_Charm  0x90d1297D9c86f29797c28FCddB51d056020dEfC3
+
+// 签名地址
+// 私钥： 0x1b502936fcfa1381d1bc454dac74f1a2d2c7e4ed7634fe1acc57b0fa32c5f26e 【勿在生产环境中使用】
+const SIGNER_ADDRESS = "0x9548B3682cD65D3265C92d5111a9782c86Ca886d";
+```
+
 ## 接口
 
 数据类型转换 `getInt128`
