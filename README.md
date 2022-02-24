@@ -13,30 +13,33 @@
 // 网络
 kovan.infura.io
 // 测试用的代币
-WETH  0x8B9b84b42b908E6f6D1E06CaA7C8247ED377095a
+WETH  0xF79F435589c222eAc898cda06067De9733eD1254
 // 资产
-BTC  0x176F9f144362AA97c287A45e02229c1146376734
+BTC  0x21Fec888ec03F2816D56b816B874E7C3C9C90E45
 // 系统代币
-Charm  0xbBc8bba71730124b310f0ABF96df7A3F9f96256d
+Charm  0x26EDC6fCcf79fCe2aa468719767f3cB763088dd5
 
 // 配置合约
-Config  0x92F52EF91Ec9bC8308384D92fE05217B67D897Be
+Config  0xDbaB9EDb3B028B32522a720F1B57628BbC8A8e4d
 
 // 开仓策略合约
 // 二元
-BinaryOptions  0x5264B091025F98E6689fd573d70eb484DAbaa136
+BinaryOptions  0x6be9AFfA469B84c9DF6B63c88Db07DB8df13D929
 // 线性
-LinearOptions  0xfC082D596B089e9D4c136DfAA513A3f6E33a4f7d
+LinearOptions  0x0E800AD36C24C5C63Ce6aBFc4eBacFbedE268B9b
 
 // 期权合约
-SatoshiOpstion_Charm  0x90d1297D9c86f29797c28FCddB51d056020dEfC3
+SatoshiOpstion_Charm  0x05b340B04Bea6740119A7e181887fb479FfEEaEF
 
 // 路由合约 
-router to  0x4B987eAebe3A0FbDA3301848CF70A796d53EC331
+router to  0xc66c8b2920f3757D9443fcb52E6c2A4377194aef
 
 // 签名地址
 // 私钥： 0x1b502936fcfa1381d1bc454dac74f1a2d2c7e4ed7634fe1acc57b0fa32c5f26e 【勿在生产环境中使用】
 const SIGNER_ADDRESS = "0x9548B3682cD65D3265C92d5111a9782c86Ca886d";
+
+
+
 ```
 
 ## 接口
@@ -64,8 +67,9 @@ const SIGNER_ADDRESS = web3.eth.accounts.privateKeyToAccount(PRIVATE_KEY).addres
 
 // tokenAddress: string, tradePrice: uint128, nonce: number
 function getPriceData(tokenAddress, tradePrice, nonce) {
-    const parameterTypes = ["address", "uint128", "uint256", "address"];
-    const parameterValues = [tokenAddress, tradePrice.toString(), nonce, SIGNER_ADDRESS];
+    const deadline = (new Date() / 1000 + 60).toFixed(0)
+    const parameterTypes = ["address", "uint128", "uint256", "uint256", "address"];
+    const parameterValues = [tokenAddress, tradePrice.toString(), nonce, deadline,SIGNER_ADDRESS];
     const hash = "0x" + abi.soliditySHA3(parameterTypes, parameterValues).toString("hex");
     const signature_ = web3.eth.accounts.sign(hash, PRIVATE_KEY);
 
@@ -73,6 +77,7 @@ function getPriceData(tokenAddress, tradePrice, nonce) {
         tokenAddress,
         tradePrice: tradePrice.toString(),
         nonce,
+        deadline,
         signature: signature_.signature
     };
 }
@@ -102,6 +107,29 @@ const methods = await options.methods.buyOptions(
     ]
 )
 
+// 列子
+const {
+    tokenAddress,
+    tradePrice,
+    nonce,
+    deadline,
+    signature
+} = getPriceData(BTC.address, getInt128(1123.31), 0 )
+tx = await router.buyOptions(
+    false, // true 开多，false 看空
+    getInt128(6), // delta
+    getInt128(1.05), // 杠杆
+    getInt128(1e18), // 金额
+    LinearOptions.address, // 策略 合约地址 ：contracts/public/BinaryOptions.sol | contracts/public/LinearOption.sol
+    [
+        tokenAddress, // 标的币种
+        tradePrice, // 交易价格
+        nonce, // 签名 有效 nonce
+        deadline,
+        signature // 签名
+    ]
+)
+
 
 const calls = await methods.call()
 // 开仓数量 wei
@@ -110,6 +138,11 @@ calls.mintBalance
 calls.pid
 
 // 开仓上链
+
+// 1. 授权
+tx = await BTC.approve(router.address, amount)
+await tx.wait()
+// 2. 交易
 const tx = await methods.send()
 ```
 
