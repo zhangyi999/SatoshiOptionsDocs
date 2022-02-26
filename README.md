@@ -13,33 +13,30 @@
 // 网络
 kovan.infura.io
 // 测试用的代币
-WETH  0xF79F435589c222eAc898cda06067De9733eD1254
+WETH  0xF21C7F14dBdFBDC0dca2842a7997cA6b795bE309
 // 资产
-BTC  0x21Fec888ec03F2816D56b816B874E7C3C9C90E45
+BTC  0x9AE5f3BA7Dbe484A91058ec22875857a2fa9F573
 // 系统代币
-Charm  0x26EDC6fCcf79fCe2aa468719767f3cB763088dd5
+Charm  0xd7209fA60b999aEC92e656E754BABDe0990be612
 
 // 配置合约
-Config  0xDbaB9EDb3B028B32522a720F1B57628BbC8A8e4d
+Config  0xA6ccE654D6B4dBF8b7F34076eaa7b707ebc9E911
 
 // 开仓策略合约
 // 二元
-BinaryOptions  0x6be9AFfA469B84c9DF6B63c88Db07DB8df13D929
+BinaryOptions  0xB8AAED41691F346434fD9135ab37fA0FeD66dCA2
 // 线性
-LinearOptions  0x0E800AD36C24C5C63Ce6aBFc4eBacFbedE268B9b
+LinearOptions  0xF615497a7356e560FBeE3BAe936ea49e67F82F03
 
 // 期权合约
-SatoshiOpstion_Charm  0x05b340B04Bea6740119A7e181887fb479FfEEaEF
+SatoshiOpstion_Charm  0x67cABa39b375aAb0615442a8D799bC1aeB59e082
 
 // 路由合约 
-router to  0xc66c8b2920f3757D9443fcb52E6c2A4377194aef
+router to  0xE532D459478bA81704d87E220a76E6d2109262D8
 
 // 签名地址
 // 私钥： 0x1b502936fcfa1381d1bc454dac74f1a2d2c7e4ed7634fe1acc57b0fa32c5f26e 【勿在生产环境中使用】
 const SIGNER_ADDRESS = "0x9548B3682cD65D3265C92d5111a9782c86Ca886d";
-
-
-
 ```
 
 ## 接口
@@ -64,6 +61,9 @@ const abi = require('ethereumjs-abi');
 const PRIVATE_KEY = "0x1b502936fcfa1381d1bc454dac74f1a2d2c7e4ed7634fe1acc57b0fa32c5f26e";  
 let nonce = new BigNumber(0);
 const SIGNER_ADDRESS = web3.eth.accounts.privateKeyToAccount(PRIVATE_KEY).address; //2109
+
+// nonce 获取
+const nonce = SatoshiOptions_Charm.methods.seenNonces(sender)
 
 // tokenAddress: string, tradePrice: uint128, nonce: number
 function getPriceData(tokenAddress, tradePrice, nonce) {
