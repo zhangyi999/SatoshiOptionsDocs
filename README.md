@@ -13,26 +13,26 @@
 // 网络
 kovan.infura.io
 // 测试用的代币
-WETH  0xF21C7F14dBdFBDC0dca2842a7997cA6b795bE309
+WETH  0x791229928Be5F33194E779787b63555D32F8AA9E
 // 资产
-BTC  0x9AE5f3BA7Dbe484A91058ec22875857a2fa9F573
+BTC  0x1d8E11b10e35AC2E355b39D8e0798D25Cd621837
 // 系统代币
-Charm  0xd7209fA60b999aEC92e656E754BABDe0990be612
+Charm  0x38c2A5a38365b50383f51cfD500a04501e4a6109
 
 // 配置合约
-Config  0xA6ccE654D6B4dBF8b7F34076eaa7b707ebc9E911
+Config  0x1E9a5746a4ba4355bf89CAF331Ae51ce00fF9eb8
 
 // 开仓策略合约
 // 二元
-BinaryOptions  0xB8AAED41691F346434fD9135ab37fA0FeD66dCA2
+BinaryOptions  0x0Ee4454F6FD8c64e5633f34bF844105450257009
 // 线性
-LinearOptions  0xF615497a7356e560FBeE3BAe936ea49e67F82F03
+LinearOptions  0xEd95A8a9421AbBC5474a922bF6736C37292aF68C
 
 // 期权合约
 SatoshiOpstion_Charm  0x67cABa39b375aAb0615442a8D799bC1aeB59e082
 
 // 路由合约 
-router to  0xE532D459478bA81704d87E220a76E6d2109262D8
+router to  0x34E248C842354669E38532Ec5d9c906c5018B54E
 
 // 签名地址
 // 私钥： 0x1b502936fcfa1381d1bc454dac74f1a2d2c7e4ed7634fe1acc57b0fa32c5f26e 【勿在生产环境中使用】
@@ -97,7 +97,7 @@ const methods = await options.methods.buyOptions(
     true, // true 开多，false 看空
     getInt128(delta), // delta
     getInt128(2), // 杠杆
-    getInt128(1e18), // 金额
+    getInt128(1.3213), // 金额 
     strategyAddress, // 策略 合约地址 ：contracts/public/BinaryOptions.sol | contracts/public/LinearOption.sol
     [
         tokenAddress, // 标的币种
