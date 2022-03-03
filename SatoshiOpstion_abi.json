@@ -254,6 +254,67 @@
       "type": "function"
     },
     {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_from",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_pid",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint128",
+          "name": "_cAmount",
+          "type": "uint128"
+        },
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "tradeToken",
+              "type": "address"
+            },
+            {
+              "internalType": "uint128",
+              "name": "tradePrice",
+              "type": "uint128"
+            },
+            {
+              "internalType": "uint256",
+              "name": "nonce",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "deadline",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bytes",
+              "name": "signature",
+              "type": "bytes"
+            }
+          ],
+          "internalType": "struct SatoshiOptions_Charm.SignedPriceInput",
+          "name": "signedPr",
+          "type": "tuple"
+        }
+      ],
+      "name": "burnFor",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "_liquidationNum",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
       "inputs": [],
       "name": "charm",
       "outputs": [
@@ -286,12 +347,17 @@
               "type": "uint256"
             },
             {
+              "internalType": "uint256",
+              "name": "deadline",
+              "type": "uint256"
+            },
+            {
               "internalType": "bytes",
               "name": "signature",
               "type": "bytes"
             }
           ],
-          "internalType": "struct SatoshiOpstion_Charm.SignedPriceInput",
+          "internalType": "struct SatoshiOptions_Charm.SignedPriceInput",
           "name": "signedPr",
           "type": "tuple"
         }
@@ -305,51 +371,6 @@
         }
       ],
       "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_pid",
-          "type": "uint256"
-        },
-        {
-          "internalType": "uint128",
-          "name": "_cAmount",
-          "type": "uint128"
-        },
-        {
-          "components": [
-            {
-              "internalType": "address",
-              "name": "tradeToken",
-              "type": "address"
-            },
-            {
-              "internalType": "uint128",
-              "name": "tradePrice",
-              "type": "uint128"
-            },
-            {
-              "internalType": "uint256",
-              "name": "nonce",
-              "type": "uint256"
-            },
-            {
-              "internalType": "bytes",
-              "name": "signature",
-              "type": "bytes"
-            }
-          ],
-          "internalType": "struct SatoshiOpstion_Charm.SignedPriceInput",
-          "name": "signedPr",
-          "type": "tuple"
-        }
-      ],
-      "name": "close",
-      "outputs": [],
-      "stateMutability": "payable",
       "type": "function"
     },
     {
@@ -447,9 +468,19 @@
               "internalType": "int128",
               "name": "K",
               "type": "int128"
+            },
+            {
+              "internalType": "address",
+              "name": "strategy",
+              "type": "address"
+            },
+            {
+              "internalType": "address",
+              "name": "tradeToken",
+              "type": "address"
             }
           ],
-          "internalType": "struct SatoshiOpstion_Charm.NftData",
+          "internalType": "struct SatoshiOptions_Charm.NftData",
           "name": "",
           "type": "tuple"
         }
@@ -463,11 +494,6 @@
           "internalType": "string",
           "name": "uri_",
           "type": "string"
-        },
-        {
-          "internalType": "address",
-          "name": "_charm",
-          "type": "address"
         },
         {
           "internalType": "contract IConfig",
@@ -507,6 +533,11 @@
     {
       "inputs": [
         {
+          "internalType": "address",
+          "name": "_to",
+          "type": "address"
+        },
+        {
           "internalType": "bool",
           "name": "direction",
           "type": "bool"
@@ -527,6 +558,11 @@
           "type": "uint128"
         },
         {
+          "internalType": "address",
+          "name": "_strategy",
+          "type": "address"
+        },
+        {
           "components": [
             {
               "internalType": "address",
@@ -544,21 +580,31 @@
               "type": "uint256"
             },
             {
+              "internalType": "uint256",
+              "name": "deadline",
+              "type": "uint256"
+            },
+            {
               "internalType": "bytes",
               "name": "signature",
               "type": "bytes"
             }
           ],
-          "internalType": "struct SatoshiOpstion_Charm.SignedPriceInput",
+          "internalType": "struct SatoshiOptions_Charm.SignedPriceInput",
           "name": "signedPr",
           "type": "tuple"
         }
       ],
-      "name": "open",
+      "name": "mintTo",
       "outputs": [
         {
           "internalType": "uint256",
           "name": "pid",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "mintBalance",
           "type": "uint256"
         }
       ],
@@ -583,6 +629,19 @@
       "name": "renounceOwnership",
       "outputs": [],
       "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "route",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
       "type": "function"
     },
     {
@@ -655,6 +714,25 @@
       "inputs": [
         {
           "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "name": "seenNonces",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
           "name": "operator",
           "type": "address"
         },
@@ -678,6 +756,32 @@
         }
       ],
       "name": "setDataProvider",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_route",
+          "type": "address"
+        }
+      ],
+      "name": "setRoute",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_strategy",
+          "type": "address"
+        }
+      ],
+      "name": "setStrategy",
       "outputs": [],
       "stateMutability": "nonpayable",
       "type": "function"
